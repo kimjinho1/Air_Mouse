@@ -1,5 +1,4 @@
 Incheon University(INU) Capstone Design 2019
 
-subject: computer-assistive-devices-for-disabled  
-
+subject: computer-assistive-devices-for-disabled      
 Member: Kim jinho(김진호)  
