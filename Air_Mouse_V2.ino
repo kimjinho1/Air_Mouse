@@ -74,10 +74,10 @@ void loop()
   if (lb == 1 && rb == 1) 
   {
     ++timer1;
-    if (timer1 > 700) 
+    if (timer1 > 150) 
     {   
       Serial.println("민감도 설정 모드\n");
-      delay(1000);
+      delay(800);
       Serial.print("민감도:  ");
       Serial.println(sens_num);
       while(1) 
@@ -99,7 +99,7 @@ void loop()
             b_cnt = 0;
             Serial.print("민감도:  ");
             Serial.println(sens_num);
-            delay(200);
+            delay(100);
           }
         }
         else if(lb == 0 && rb == 1) 
@@ -111,17 +111,17 @@ void loop()
             b_cnt = 0;
             Serial.print("민감도:  ");
             Serial.println(sens_num);
-            delay(200);
+            delay(100);
           }    
         }
         
         switch(sens_num) 
         {
-           case 1: sens = 740; Sens_Led_On(sens_num); break;
-           case 2: sens = 850; Sens_Led_On(sens_num); break;
-           case 3: sens = 1000; Sens_Led_On(sens_num); break;
-           case 4: sens = 1220; Sens_Led_On(sens_num); break;
-           case 5: sens = 1350; Sens_Led_On(sens_num); break;
+           case 5: sens = 820; Sens_Led_On(sens_num); break;
+           case 4: sens = 850; Sens_Led_On(sens_num); break;
+           case 3: sens = 1100; Sens_Led_On(sens_num); break;
+           case 2: sens = 1220; Sens_Led_On(sens_num); break;
+           case 1: sens = 1380; Sens_Led_On(sens_num); break;
            default: break;
         }
         delay(1);
@@ -131,7 +131,7 @@ void loop()
       Serial.println("\n민감도 설정 완료!");  
       Serial.print("현재 민감도: "); 
       Serial.println(sens_num);      
-      delay(3000);   
+      delay(600);   
     }
   }
   
@@ -141,9 +141,9 @@ void loop()
   }
   
   gyroZ = GyZ / sens;
-  gyroY = -GyY / sens * 0.92; 
+  gyroY = -GyY / sens; 
 
-  if(lb == 1) // Left button이 1이라는건 좌클릭을 하고 있다는 상태이므로 
+  if(rb == 1) // Left button이 1이라는건 좌클릭을 하고 있다는 상태이므로 
   {                                       // 마우스를 누른 상태로 유지시켜주는 Mouse.press()를 사용함.
     Mouse.press(); // 좌클릭 한 상태 유지
   }
@@ -151,9 +151,10 @@ void loop()
   {
     Mouse.release(); //클릭 상태 해제
   }
-  else if (rb == 1) // 우클릭
+  else if (lb == 1) // 우클릭
   {
     Mouse.click(MOUSE_RIGHT);
+    delay(10);
   } 
 
   Sprint1(gyroY, gyroZ, lb, rb);
@@ -183,9 +184,9 @@ void Sprint1(int gyroY, int gyroZ, int lb, int rb) // 자이로, 버튼 값 확�
   Serial.print(" // Y축: "); 
   Serial.print(-gyroY);
   Serial.print(" // 좌 클릭: ");
-  Serial.print(lb);
+  Serial.print(rb);
   Serial.print(" // 우 클릭: ");
-  Serial.println(rb);
+  Serial.println(lb);
 }
 
 void Sprint2(int timer1, int sens, int sens_num) // 민감도 확인용 시리얼 프린트 함수
